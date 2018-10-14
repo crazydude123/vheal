@@ -9,19 +9,24 @@ package thatteidlipudina.com.vheal;
         import android.os.Bundle;
         import android.provider.MediaStore;
         import android.support.annotation.NonNull;
+        import android.support.design.widget.FloatingActionButton;
         import android.support.v4.app.ActivityCompat;
         import android.support.v4.content.ContextCompat;
         import android.support.v7.app.AppCompatActivity;
         import android.view.View;
+        import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.ImageView;
+        import android.widget.ListView;
+        import android.widget.SearchView;
         import android.widget.Toast;
 
         import net.gotev.uploadservice.MultipartUploadRequest;
         import net.gotev.uploadservice.UploadNotificationConfig;
 
         import java.io.IOException;
+        import java.util.ArrayList;
         import java.util.UUID;
 
         import thatteidlipudina.com.vheal.R;
@@ -33,6 +38,11 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     private Button buttonUpload;
     private ImageView imageView;
     private EditText editText;
+
+    SearchView searchView;
+    ListView listView;
+    ArrayList<String> list;
+    ArrayAdapter<String > adapter;
 
     //Image request code
     private int PICK_IMAGE_REQUEST = 1;
@@ -63,7 +73,56 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         //Setting clicklistener
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
+
+
+        searchView = (SearchView) findViewById(R.id.searchdisease);
+        listView = (ListView) findViewById(R.id.DropDown);
+
+        list = new ArrayList<>();
+
+        FloatingActionButton mFloat= (FloatingActionButton) findViewById(R.id.fab);
+        mFloat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(UploadActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        //Example list
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Pineapple");
+        list.add("Orange");
+        list.add("Lychee");
+        list.add("Gavava");
+        list.add("Peech");
+        list.add("Melon");
+        list.add("Watermelon");
+        list.add("Papaya");
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list);
+        listView.setAdapter(adapter);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                if(list.contains(query)){
+                    adapter.getFilter().filter(query);
+                }else{
+                    Toast.makeText(UploadActivity.this, "No Match found",Toast.LENGTH_LONG).show();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //    adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
+
 
 
     /*
