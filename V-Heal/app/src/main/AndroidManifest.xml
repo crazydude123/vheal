@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="thatteidlipudina.com.vheal">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,7 +16,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher1_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="ExtraText,GoogleAppIndexingWarning">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCSbqXphN86LW0uAySayhxp50-TM2bWos8" />
@@ -32,14 +34,48 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="thatteidlipudina.com.vheal.LoginActivity" />
-        <activity android:name="thatteidlipudina.com.vheal.MainActivity" />
-        <activity android:name="thatteidlipudina.com.vheal.MapActivity" />
-        <activity android:name="thatteidlipudina.com.vheal.RegisterActivity" />
-        <activity android:name="thatteidlipudina.com.vheal.UploadActivity" />
-        <activity android:name="thatteidlipudina.com.vheal.Ailments_or_Report" />
-        <activity android:name="thatteidlipudina.com.vheal.Credit" />
-        <activity android:name="thatteidlipudina.com.vheal.Search" />
+        <activity
+            android:name="thatteidlipudina.com.vheal.LoginActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="thatteidlipudina.com.vheal.MainActivity1" />
+        </activity>
+        <activity android:name="thatteidlipudina.com.vheal.MainActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="thatteidlipudina.com.vheal.RegisterActivity" />
+        </activity>
+        <activity android:name="thatteidlipudina.com.vheal.MapActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="thatteidlipudina.com.vheal.MainActivity" />
+        </activity>
+        <activity android:name="thatteidlipudina.com.vheal.RegisterActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="thatteidlipudina.com.vheal.MainActivity1" />
+        </activity>
+        <activity android:name="thatteidlipudina.com.vheal.UploadActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="thatteidlipudina.com.vheal.Ailments_or_Report" />
+        </activity>
+        <activity android:name="thatteidlipudina.com.vheal.Ailments_or_Report">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="thatteidlipudina.com.vheal.MapActivity" />
+        </activity>
+
+        <activity android:name="thatteidlipudina.com.vheal.Credit">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="thatteidlipudina.com.vheal.UploadActivity" />
+        </activity>
+        <activity android:name="thatteidlipudina.com.vheal.Search">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="thatteidlipudina.com.vheal.LoginActivity" />
+        </activity>
 
     </application>
 

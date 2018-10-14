@@ -4,9 +4,6 @@ import android.net.Uri;
 
 import com.google.android.gms.maps.model.LatLng;
 
-/**
- * Created by User on 10/2/2017.
- */
 
 public class PlaceInfo {
 
@@ -75,9 +72,15 @@ public class PlaceInfo {
         this.websiteUri = websiteUri;
     }
 
-    public LatLng getLatlng() {
-        return latlng;
-    }
+    //
+
+    //public LatLng getLatlng() {
+
+    //return latlng;
+
+    //}
+
+    //
 
     public void setLatlng(LatLng latlng) {
         this.latlng = latlng;
@@ -91,13 +94,14 @@ public class PlaceInfo {
         this.rating = rating;
     }
 
-    public String getAttributions() {
-        return attributions;
-    }
-
-    public void setAttributions(String attributions) {
-        this.attributions = attributions;
-    }
+   /*
+     public String getAttributions() {
+     return attributions;
+     }
+     public void setAttributions(String attributions) {
+     this.attributions = attributions;
+     }
+     */
 
     @Override
     public String toString() {

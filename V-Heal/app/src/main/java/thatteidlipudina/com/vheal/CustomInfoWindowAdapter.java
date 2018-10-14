@@ -10,11 +10,9 @@ import android.widget.TextView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
-import thatteidlipudina.com.vheal.R;
+//import thatteidlipudina.com.vheal.R;
 
-/**
- * Created by User on 10/2/2017.
- */
+
 
 public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 

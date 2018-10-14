@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.view.View;
 import android.content.Intent;
 
-import thatteidlipudina.com.vheal.R;
+//import thatteidlipudina.com.vheal.R;
 
 public class MainActivity1 extends AppCompatActivity {
 

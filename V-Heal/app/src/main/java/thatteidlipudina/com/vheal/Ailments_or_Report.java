@@ -12,7 +12,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
-import thatteidlipudina.com.vheal.R;
+//import thatteidlipudina.com.vheal.R;
 
 public class Ailments_or_Report extends AppCompatActivity {
     int page;
@@ -83,7 +83,7 @@ public class Ailments_or_Report extends AppCompatActivity {
                 @Override
                 public void onValueChange(NumberPicker numberPicker, int i, int i1) {
                     Toast.makeText(Ailments_or_Report.this,
-                            "selected number "+numberPicker.getValue(), Toast.LENGTH_SHORT);
+                            "selected number "+numberPicker.getValue(), Toast.LENGTH_SHORT).show();
                 }
             };
 }
