@@ -4,6 +4,7 @@ package thatteidlipudina.com.vheal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.widget.NumberPicker;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -50,21 +51,25 @@ public class Ailments_or_Report extends AppCompatActivity {
             }
         });
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton mFloat= (FloatingActionButton) findViewById(R.id.fab);
+        mFloat.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClickFloat(View view) {
+            public void onClick(View v) {
                 if(page==1){
-                    Intent intent = new Intent(getApplicationContext(), Upload.class);
+                    Intent intent = new Intent(getApplicationContext(), UploadActivity.class);
                     startActivity(intent);
 
                 }
+                else if(page==0){
+                    Intent intent = new Intent(getApplicationContext(), Credit.class);
+                    startActivity(intent);
+                }
             }
-        });*/
+        });
 
 
     }
-    public void onClickFloat(View view) {
+    /*public void onClickFloat(View view) {
         if(page==1){
             Intent intent = new Intent(getApplicationContext(), UploadActivity.class);
             startActivity(intent);
@@ -74,7 +79,7 @@ public class Ailments_or_Report extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), Credit.class);
             startActivity(intent);
         }
-    }
+    }*/
 
 
 

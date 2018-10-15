@@ -212,6 +212,8 @@ public class Search extends AppCompatActivity implements NavigationView.OnNaviga
             });
 
         } else if (id == R.id.nav_report) {
+            Intent intent= new Intent(Search.this, MapActivity.class);
+            startActivity(intent);
 
 
         }

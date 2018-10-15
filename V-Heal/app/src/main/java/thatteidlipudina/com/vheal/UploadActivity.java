@@ -9,7 +9,6 @@ package thatteidlipudina.com.vheal;
         import android.os.Bundle;
         import android.provider.MediaStore;
         import android.support.annotation.NonNull;
-        import android.support.design.widget.FloatingActionButton;
         import android.support.v4.app.ActivityCompat;
         import android.support.v4.content.ContextCompat;
         import android.support.v7.app.AppCompatActivity;
@@ -29,15 +28,19 @@ package thatteidlipudina.com.vheal;
         import java.util.ArrayList;
         import java.util.UUID;
 
-        import thatteidlipudina.com.vheal.R;
+
+        import static thatteidlipudina.com.vheal.MapActivity.pincodestatic;
+        import static thatteidlipudina.com.vheal.RegisterActivity.namestatic;
 
 public class UploadActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Declaring views
     private Button buttonChoose;
     private Button buttonUpload;
+    private Button buttonProceed;
     private ImageView imageView;
     private EditText editText;
+    private String diseasestatic;
 
     SearchView searchView;
     ListView listView;
@@ -67,12 +70,16 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         //Initializing views
         buttonChoose = (Button) findViewById(R.id.buttonChoose);
         buttonUpload = (Button) findViewById(R.id.buttonUpload);
+        buttonProceed=(Button) findViewById(R.id.buttonProceed);
         imageView = (ImageView) findViewById(R.id.imageView);
         editText = (EditText) findViewById(R.id.editTextName);
+
+
 
         //Setting clicklistener
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
+
 
 
         searchView = (SearchView) findViewById(R.id.searchdisease);
@@ -80,19 +87,11 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
 
         list = new ArrayList<>();
 
-        FloatingActionButton mFloat= (FloatingActionButton) findViewById(R.id.fab);
-        mFloat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(UploadActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
         //Example list
-        list.add("Apple");
-        list.add("Banana");
-        list.add("Pineapple");
-        list.add("Orange");
+        list.add("Dengue");
+        list.add("Malaria");
+        list.add("Ringworm");
+        list.add("Measles");
         list.add("Lychee");
         list.add("Gavava");
         list.add("Peech");
@@ -109,8 +108,10 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
 
                 if(list.contains(query)){
                     adapter.getFilter().filter(query);
+                    diseasestatic=query;
                 }else{
                     Toast.makeText(UploadActivity.this, "No Match found",Toast.LENGTH_LONG).show();
+                    diseasestatic=query;
                 }
                 return false;
             }
@@ -119,6 +120,16 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
             public boolean onQueryTextChange(String newText) {
                 //    adapter.getFilter().filter(newText);
                 return false;
+            }
+        });
+
+        buttonProceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String type= "disease";
+                Toast.makeText(UploadActivity.this,diseasestatic, Toast.LENGTH_SHORT).show();
+                Backgroundworker b= new Backgroundworker(UploadActivity.this);
+                b.execute(type, diseasestatic, pincodestatic, namestatic);
             }
         });
     }

@@ -26,7 +26,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="thatteidlipudina.com.vheal.MainActivity1"
+            android:name=".MainActivity1"
             android:theme="@style/biege">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,49 +34,48 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="thatteidlipudina.com.vheal.LoginActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="thatteidlipudina.com.vheal.MainActivity1" />
+        <activity android:name=".LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="thatteidlipudina.com.vheal.MainActivity1" />
         </activity>
-        <activity android:name="thatteidlipudina.com.vheal.MainActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="thatteidlipudina.com.vheal.RegisterActivity" />
+        <activity android:name=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="thatteidlipudina.com.vheal.RegisterActivity" />
         </activity>
-        <activity android:name="thatteidlipudina.com.vheal.MapActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="thatteidlipudina.com.vheal.MainActivity" />
+        <activity android:name=".MapActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="thatteidlipudina.com.vheal.MainActivity" />
         </activity>
-        <activity android:name="thatteidlipudina.com.vheal.RegisterActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="thatteidlipudina.com.vheal.MainActivity1" />
+        <activity android:name=".RegisterActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="thatteidlipudina.com.vheal.MainActivity1" />
         </activity>
-        <activity android:name="thatteidlipudina.com.vheal.UploadActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="thatteidlipudina.com.vheal.Ailments_or_Report" />
+        <activity android:name=".UploadActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="thatteidlipudina.com.vheal.Ailments_or_Report" />
         </activity>
-        <activity android:name="thatteidlipudina.com.vheal.Ailments_or_Report">
+        <activity android:name=".Ailments_or_Report">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="thatteidlipudina.com.vheal.MapActivity" />
         </activity>
-
-        <activity android:name="thatteidlipudina.com.vheal.Credit">
+        <activity android:name=".Credit">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="thatteidlipudina.com.vheal.UploadActivity" />
         </activity>
-        <activity android:name="thatteidlipudina.com.vheal.Search">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="thatteidlipudina.com.vheal.LoginActivity" />
+        <activity android:name=".Search">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="thatteidlipudina.com.vheal.LoginActivity" />
         </activity>
-
+        <activity android:name=".BackgroundClassWorker" />
+        <activity android:name=".Backgroundworker"></activity>
     </application>
 
 </manifest>

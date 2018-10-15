@@ -12,7 +12,7 @@
     <SearchView
         android:id="@+id/searchview"
         android:layout_width="395dp"
-        android:layout_height="168dp"
+        android:layout_height="77dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -24,15 +24,19 @@
 
     <ListView
         android:id="@+id/lv1"
-        style="@style/Widget.AppCompat.Light.ListView.DropDown"
+        style="@android:style/Widget.ListView.DropDown"
         android:layout_width="395dp"
-        android:layout_height="411dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="183dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.659"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchview" />
+        app:layout_constraintTop_toBottomOf="@+id/searchview"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginRight="8dp" />
 </android.support.constraint.ConstraintLayout>

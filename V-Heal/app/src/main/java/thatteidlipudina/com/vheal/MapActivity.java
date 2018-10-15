@@ -55,13 +55,14 @@ import thatteidlipudina.com.vheal.models.PlaceInfo;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 
-/**
- * Created by User on 10/2/2017.
- */
+
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener{
 
+    static String pincodestatic;
+    String redPincode="";
+    String bluePincode="";
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
@@ -128,6 +129,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mAilments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(redPincode.equals("") && bluePincode.equals(""))
+                    Toast.makeText(MapActivity.this, "Enter Location Again", Toast.LENGTH_SHORT).show();
+                else if(redPincode!=""){
+                    pincodestatic= redPincode;
+                }
+                else{
+                    pincodestatic=bluePincode;
+                }
                 Log.d(TAG, "onClick: Entered onclickListener");
                 Intent intent = new Intent(MapActivity.this, Ailments_or_Report.class);
                 startActivity(intent);
@@ -247,6 +256,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM,
                     address.getAddressLine(0));
+
+            if(address.getPostalCode()!=null){
+                redPincode=address.getPostalCode();
+            }
         }
     }
 
@@ -269,15 +282,28 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                     DEFAULT_ZOOM,
                                     "My Location");
+                            double lat1= currentLocation.getLatitude();
+                            double long1 = currentLocation.getLongitude();
+
+                            Geocoder geocoder = new Geocoder(MapActivity.this);
+                            try {
+                                List<Address> addresses = geocoder.getFromLocation(lat1, long1, 1);
+                                if(addresses!= null && addresses.size()>0){
+                                    bluePincode= addresses.get(0).getPostalCode();
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
 
                             /*
-                            *
-                            * Send
-                            * Current Location
-                            * currentLocation.getLatitude(), currentLocation.getLongitude()
-                            *
-                            *
-                            * */
+                             *
+                             * Send
+                             * Current Location
+                             * currentLocation.getLatitude(), currentLocation.getLongitude()
+                             *
+                             *
+                             * */
                         }else{
                             Log.d(TAG, "onComplete: current location is null");
                             Toast.makeText(MapActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
@@ -345,7 +371,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private void getLocationPermission(){
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-        ACCESS_COARSE_LOCATION};
+                ACCESS_COARSE_LOCATION};
 
         if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
@@ -428,13 +454,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 mPlace.setAddress(place.getAddress().toString());
 
                 /*
-                * @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SEND RESIDENCE to firebase@@@@@@@@@@@@@@@@
-                *
-                * send
-                * String s= place.getAddress().toString() ---- send
-                * String r= place.getLatLng() ----- send
-                *
-                * */
+                 * @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SEND RESIDENCE to firebase@@@@@@@@@@@@@@@@
+                 *
+                 * send
+                 * String s= place.getAddress().toString() ---- send
+                 * String r= place.getLatLng() ----- send
+                 *
+                 * */
                 Log.d(TAG, "onResult: address: " + place.getAddress());
 //                mPlace.setAttributions(place.getAttributions().toString());
 //                Log.d(TAG, "onResult: attributions: " + place.getAttributions());
@@ -461,14 +487,3 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     };
 }
-
-
-
-
-
-
-
-
-
-
-

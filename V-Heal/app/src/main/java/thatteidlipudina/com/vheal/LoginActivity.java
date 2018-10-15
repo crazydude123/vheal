@@ -3,7 +3,7 @@ package thatteidlipudina.com.vheal;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
+//import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -29,20 +29,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.github.nkzawa.socketio.client.Socket;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -51,15 +43,6 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    URL url1;
-
-    {
-        try {
-            url1 = new URL("http://104.211.201.108:8080/route1/");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
 
     private static final int REQUEST_READ_CONTACTS = 0;
 
@@ -201,7 +184,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isPasswordValid(String password) {
 
-        return password.length() > 4;
+        return password.length() > 3;
     }
 
     /**
@@ -209,10 +192,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
@@ -232,12 +213,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
                 }
             });
-        } else {
+        //} else {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
+          //  mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            //mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        //}
     }
 
     @Override
@@ -313,7 +294,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
 
-            if (success) {
+            /*if (success) {
 
                 Intent intent = new Intent(getApplicationContext(), Search.class);
                 startActivity(intent);
@@ -321,7 +302,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
-            }
+            }*/
         }
 
         @Override
@@ -333,36 +314,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
 
+            String type= "login";
+            //String username= mEmail;
+            Toast.makeText(LoginActivity.this,mEmail, Toast.LENGTH_SHORT).show();
+            //String pass=mPassword;
+            Backgroundworker b= new Backgroundworker(LoginActivity.this);
+            b.execute(type, mEmail, mPassword);
+            //showProgress(false);
 
-            HttpURLConnection urlConnection = null;
-            try {
-                urlConnection = (HttpURLConnection) url1.openConnection();
-                urlConnection.setDoOutput(true);
-                urlConnection.setChunkedStreamingMode(0);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
-            try {
 
-                Writer writer = new BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream(), "UTF-8"));
-                writer.write(mEmail);
-                writer.write(mPassword);
-
-                writer.close();
-                InputStream inputStream = urlConnection.getInputStream();
-
-                StringBuffer buffer = new StringBuffer();
-                if (inputStream == null) {
-                    return null;
-                }
-                Reader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-                int inputLine;
-                while ((inputLine = reader.read()) != -1) {
-                    buffer.append(inputLine + "\n");
-                }
-                if (buffer.length() == 0) {
+            /*if (result.length() == 0) {
 
                     return null;
                 }
@@ -375,71 +337,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }catch (IOException e) {
                 e.printStackTrace();
             }
-            try{
-                urlConnection.disconnect();
-            }catch(NullPointerException e){
-                e.printStackTrace();
-            }
 
-
-
-
-
-                /*OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
-                InputStream inr = new ByteArrayInputStream(mEmail.getBytes(StandardCharsets.UTF_8));
-                try {
-                    byte[] buffer = new byte[4 * 1024]; // or other buffer size
-                    int r;
-
-                    while ((r = inr.read(buffer)) != -1) {
-                        out.write(buffer, 0, r);
-                    }
-
-                    out.flush();
-                } finally {
-                    out.close();
-                    inr.close();
-                }
-                //writeStream(out);
-                OutputStream o = new ByteArrayOutputStream();
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                try {
-                    byte[] buffer = new byte[4 * 1024]; // or other buffer size
-                    int r;
-
-                    while ((r = in.read(buffer)) != -1) {
-                        o.write(buffer, 0, r);
-                    }
-
-                    out.flush();
-                    String s=buffer.toString();
-                    if(s.equals("success")){
-
-                    }
-
-
-                } finally {
-                    o.close();
-                    in.close();
-                }
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                urlConnection.disconnect();
-
-            }*/
-
-            /*for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }*/
-
-
+*/
             return true;
         }
 
